@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'register_page.dart';
-import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -38,19 +37,8 @@ class _LoginPageState extends State<LoginPage> {
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
-
-      if (!mounted) return;
-
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
-
     } on FirebaseAuthException catch (e) {
       if (!mounted) return;
-
-
-      debugPrint("LOGIN ERROR: ${e.code} - ${e.message}");
 
       String msg = "فشل تسجيل الدخول";
       if (e.code == "user-not-found") msg = "لا يوجد حساب بهذا البريد";
@@ -111,7 +99,6 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(color: Colors.black54),
                         ),
                         const SizedBox(height: 18),
-
                         TextFormField(
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
@@ -132,7 +119,6 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         const SizedBox(height: 12),
-
                         TextFormField(
                           controller: passwordController,
                           obscureText: obscure,
@@ -155,9 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         ),
-
                         const SizedBox(height: 20),
-
                         SizedBox(
                           width: double.infinity,
                           height: 50,
@@ -166,7 +150,8 @@ class _LoginPageState extends State<LoginPage> {
                               backgroundColor: const Color(0xFF5B2E91),
                               foregroundColor: Colors.white,
                               disabledForegroundColor: Colors.white70,
-                              disabledBackgroundColor: const Color(0xFF5B2E91).withOpacity(0.7),
+                              disabledBackgroundColor:
+                              const Color(0xFF5B2E91).withOpacity(0.7),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
@@ -178,18 +163,20 @@ class _LoginPageState extends State<LoginPage> {
                               height: 22,
                               child: CircularProgressIndicator(
                                 strokeWidth: 2,
-                                valueColor: AlwaysStoppedAnimation<Color>(Colors.white), // ✅ أبيض
+                                valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.white),
                               ),
                             )
                                 : const Text(
                               "دخول",
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ),
-
                         const SizedBox(height: 14),
-
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -198,7 +185,9 @@ class _LoginPageState extends State<LoginPage> {
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (_) => const RegisterPage()),
+                                  MaterialPageRoute(
+                                    builder: (_) => const RegisterPage(),
+                                  ),
                                 );
                               },
                               child: const Text("سجّلي الآن"),
